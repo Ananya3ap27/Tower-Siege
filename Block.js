@@ -13,15 +13,20 @@ class Block {
     World.add(world, this.body);
   }
   display(){
-    var pos =this.body.position;
+     var pos =this.body.position;
     var angle = this.body.angle;
-    push();
-    translate(pos.x, pos.y);
-    rotate(angle);
-    rectMode(CENTER);
-    fill(this.v);
-    //stroke (rgb(0, 255, 204));
-    rect(0,0, 30, 40);
-    pop();
+     
+    if(this.body.speed > 7){
+       World.remove(world, this.body);
+       this.Visiblity = this.Visiblity - 5;
+       tint(255,this.Visiblity);
+     }else{
+      push();
+      translate(pos.x, pos.y);
+      rectMode(CENTER);
+      fill(this.v);
+      rect(0,0, 30, 40);
+      pop();
+     }
   }
 };
