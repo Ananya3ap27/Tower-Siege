@@ -11,6 +11,7 @@ function setup(){
     world = engine.world;
 
     ground=new Ground(380,360,200,20);
+    ground1=new Ground(600,500,1200,20);
     block1=new Block(330,235,"lightblue");
     block2=new Block(360,235,"lightblue");
     block3=new Block(390,235,"lightblue");
@@ -29,9 +30,10 @@ function setup(){
 function draw() {
   background(0);
   Engine.update(engine);
-  ground.display();
+  
   drawSprites();
-
+  ground.display();
+  ground1.display();
   block1.display();
   block2.display();
   block3.display();
@@ -41,9 +43,7 @@ function draw() {
   block7.display();
   block8.display();
   block9.display();
-
   hex.display();
-
   string.display();
 
 }
@@ -57,13 +57,13 @@ function mouseReleased()
   string.fly();
   
 }
-/*function keyPressed(){
+function keyPressed(){
   if(keyCode === 32){
     string.attach(hex.body);
     //Matter.Body.setPosition(hex.body, {x:800, y:250});
   }
 }
-function colouring(){
+/*function colouring(){
   if(block1||block2||block3||block4||block5){
     colour="pink";
   }else{
