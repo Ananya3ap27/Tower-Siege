@@ -28,9 +28,6 @@ function setup(){
     hex = new Hex(1000,250);
     string=new Launcher(hex.body,{x:800,y:250});
 
-    //blockG.add(block1);blockG.add(block2);blockG.add(block3);blockG.add(block4);blockG.add(block5);blockG.add(block6);blockG.add(block7);
-    //blockG.add(block8);blockG.add(block9);
-
 }
 
 function draw() {
