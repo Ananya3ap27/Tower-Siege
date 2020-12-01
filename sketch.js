@@ -3,7 +3,11 @@ const World= Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
-var block1 , ground , string , hex;
+var block1 , ground , string , hex , backgroundImg , score=0 ;
+
+function preload(){
+  getBackgroundImg();
+}
 
 function setup(){
     var canvas = createCanvas(1200,500);
@@ -24,14 +28,19 @@ function setup(){
     hex = new Hex(1000,250);
     string=new Launcher(hex.body,{x:800,y:250});
 
+    //blockG.add(block1);blockG.add(block2);blockG.add(block3);blockG.add(block4);blockG.add(block5);blockG.add(block6);blockG.add(block7);
+    //blockG.add(block8);blockG.add(block9);
 
 }
 
 function draw() {
-  background(0);
+  if(backgroundImg)
+        background(backgroundImg);
   Engine.update(engine);
   
   drawSprites();
+
+  text("Score - "+score,900,100);
   ground.display();
   ground1.display();
   block1.display();
@@ -55,18 +64,28 @@ function mouseDragged()
 function mouseReleased()
 {
   string.fly();
+  score=score+Math.round(hex.body.speed);
   
 }
 function keyPressed(){
   if(keyCode === 32){
     string.attach(hex.body);
-    //Matter.Body.setPosition(hex.body, {x:800, y:250});
   }
 }
-/*function colouring(){
-  if(block1||block2||block3||block4||block5){
-    colour="pink";
-  }else{
-    colour="yellow";
+async function getBackgroundImg(){
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
+  var responseJSON = await response.json();
+
+  var datetime = responseJSON.datetime;
+  var hour = datetime.slice(11,13);
+  
+  if(hour>=0600 && hour<=1900){
+      bg = "bg2.png";
   }
-}*/
+  else{
+      bg = "bg1.png";
+  }
+
+  backgroundImg = loadImage(bg);
+  console.log(backgroundImg);
+}
